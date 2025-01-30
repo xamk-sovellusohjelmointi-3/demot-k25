@@ -122,7 +122,7 @@ JavaScript-koodia voidaan myös tulostaa HTML-sisältöihin käyttämällä `<%=
 <!-- Näytetään "Heippa!" h1-elementissä. -->
 ```
 
-EJS-templaten muotoiluun käytetään Googlen Material Design Lite -kirjastoa ja ikonit saadaan Googlen Material Icons -kirjastosta. Fonttina käytetään Googlen Roboto-fonttia.
+EJS-templaten muotoiluun käytetään Googlen [Material Design Lite] (https://getmdl.io/) -kirjastoa ja ikonit saadaan Googlen Material Icons -kirjastosta. Fonttina käytetään Googlen Roboto-fonttia.
 
 Muotoiluihin löydät ohjeistuksen kirjastojen dokumentaatioista, eikä niiden käyttöä käydä tässä erikseen. Voit EJS-template -koodia tarkastelemalla verrata, miten kirjastojen komponentteja käytetään muotoilemaan template-sivujen sisältöä.
 
