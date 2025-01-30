@@ -30,6 +30,26 @@ app.get("/", async (req : express.Request, res : express.Response) => {
 
 Prisma-tietokanta on toteutettu paikallisena tietokantatiedostona ja se on myös populoitu valmiiksi alustavilla tiedoilla, eli sinun ei tarvitse itse luoda tietokantaa. Voit tarkastella ja muokata tietokantaa Prisma Studiolla avaamalla uuden komentokehotteen (Terminal) ja suorittamalla komennon `npx prisma studio`. Prisma Studio avautuu omaan porttiinsa ja siellä on valmiiksi tietokantataulu Ostos-mallille. Voit lisätä, poistaa ja muokata rivejä ja nähdä muutokset selaimessa Ostoslista-sovelluksessa.
 
+Prisma-tietokanta on tuotu sovellukseen komennolla:
+
+```typescript
+import { PrismaClient } from '@prisma/client';
+```
+
+Tietokannasta pitää myös luoda uusi ilmentymä, kuten rivillä 6:
+
+```typescript
+const prisma : PrismaClient = new PrismaClient();
+```
+
+Tietokantaan voi tehdä pyyntöjä käyttämällä Prisman omia komentoja. Rivillä 16 haetaan Ostos-taulun kaikki tietueet vastauksena palvelimen juuren GET-pyyntöön komennolla:
+
+```typescript
+let ostokset = await prisma.ostos.findMany();
+```
+
+Koska tietokantahaussa voi mennä hetki, komento pitää toteuttaa asynkroonisena `await`-komennolla. Tämän seurauksena myös GET-pyyntö kokonaisuudessaan pitää käsitellä asynkroonisena funktiona lisäämällä avainsanan `async` pyynnön käsittelijään. Tietokannan ostoksista tallennettu muuttuja voidaan lähettää EJS-templateen parametrisesti JSON-objektina `{ ostokset : ostokset }`. JSON-objektissa avain-arvo -parin vasen nimi on parametrina lähetetyn objektin nimi, johon viitataan EJS-templatessa. Parin oikea nimi on `ostokset`-muuttujan nimi, joka määritellään komennon yllä. Voit nimetä EJS-templateen parametrina lähetettävän avaimen haluamallasi tavalla, esim. `{ data : ostokset }`. Yleisenä käytäntönä kuitenkin on käyttää samaa nimeä avaimessa ja sen arvossa. Avaimen ja arvon ollessa sama, komennon voisi lyhentää myös muotoon `res.render("index", { ostokset });` Demoissa kuitenkin käytetään selvyyden vuoksi pidempää tapaa, jossa nimetään sekä parametri, että sen sisältämä tieto.
+
 ### index.ejs
 
 index.ejs on EJS-template, jota käytetään sovelluksen ostoslistan renderöintiin. Koska sovelluksessa käytetään EJS-templateja, voidaan HTML-sisältöä muodostaa dynaamisesti JavaScriptin avulla. Tässä esimerkissä Prisma-tietokannan sisältämät ostokset haetaan ohjelmallisesti `index.ts` -tiedoston juuren REST API GET -pyynnössä ja lähetetään parametrina renderöitävälle `index.ejs` -templatelle.
