@@ -28,6 +28,8 @@ app.get("/", async (req : express.Request, res : express.Response) => {
 });
 ```
 
+Prisma-tietokanta on toteutettu paikallisena tietokantatiedostona ja se on myös populoitu valmiiksi alustavilla tiedoilla, eli sinun ei tarvitse itse luoda tietokantaa. Voit tarkastella ja muokata tietokantaa Prisma Studiolla avaamalla uuden komentokehotteen (Terminal) ja suorittamalla komennon `npx prisma studio`. Prisma Studio avautuu omaan porttiinsa ja siellä on valmiiksi tietokantataulu Ostos-mallille. Voit lisätä, poistaa ja muokata rivejä ja nähdä muutokset selaimessa Ostoslista-sovelluksessa.
+
 ### index.ejs
 
 index.ejs on EJS-template, jota käytetään sovelluksen ostoslistan renderöintiin. Koska sovelluksessa käytetään EJS-templateja, voidaan HTML-sisältöä muodostaa dynaamisesti JavaScriptin avulla. Tässä esimerkissä Prisma-tietokannan sisältämät ostokset haetaan ohjelmallisesti `index.ts` -tiedoston juuren REST API GET -pyynnössä ja lähetetään parametrina renderöitävälle `index.ejs` -templatelle.
